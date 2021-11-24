@@ -14,7 +14,7 @@ for (let i = 0; i < 64; i++) {
     let box = document.getElementById(`box${i + 1}`);
     box.num = i + 1;
     box.name = `box${i + 1}`
-    box.clicked = false;
+    box.fill = false;
     // box.boxRight = 'n/a';
     // box.boxLeft = 'n/a';
     boxes.push(box)
@@ -23,11 +23,35 @@ for (let i = 0; i < 64; i++) {
 //box top for all rows
 for (let j = 8; j < 64; j += 8) {
     // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 7; i++) {
+    for (let i = j; i < j + 8; i++) {
         // for (let i = 0; i < 0 + 7; i++) {
         // console.log(`i loop = i ${i} j ${j}`);
         boxes[i].boxTop = boxes[i - 8]
     }
+}
+
+//box top right - centre boxes
+for (let j = 9; j < 55; j += 8) {
+    // console.log(`j loop = ${j}`)
+    for (let i = j; i < j + 6; i++) {
+        // for (let i = 0; i < 0 + 7; i++) {
+        // console.log(`i loop = i ${i} j ${j}`);
+        boxes[i].boxTopRight = boxes[i - 7]
+    }
+}
+
+//box top right - 1st column
+for (let i = 8; i < 57; i += 8) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxTopRight = boxes[i - 7]
+}
+
+//box top right - bottom row
+for (let i = 57; i < 63; i++) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxTopRight = boxes[i - 7]
 }
 
 //box right for all rows
@@ -40,6 +64,64 @@ for (let j = 0; j < 57; j += 8) {
     }
 }
 
+//box bottom right - centre boxes
+for (let j = 9; j < 55; j += 8) {
+    // console.log(`j loop = ${j}`)
+    for (let i = j; i < j + 6; i++) {
+        // for (let i = 0; i < 0 + 7; i++) {
+        // console.log(`i loop = i ${i} j ${j}`);
+        boxes[i].boxBottomRight = boxes[i + 9]
+    }
+}
+
+//box bottom right - top row
+for (let i = 0; i < 7; i++) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxBottomRight = boxes[i + 9]
+}
+
+//box bottom right - 1st row
+for (let i = 8; i < 49; i += 8) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxBottomRight = boxes[i + 9]
+}
+
+//box bottom for all rows
+for (let j = 0; j < 56; j += 8) {
+    // console.log(`j loop = ${j}`)
+    for (let i = j; i < j + 8; i++) {
+        // for (let i = 0; i < 0 + 7; i++) {
+        // console.log(`i loop = i ${i} j ${j}`);
+        boxes[i].boxBottom = boxes[i + 8]
+    }
+}
+
+//box bottom left - centre boxes
+for (let j = 9; j < 55; j += 8) {
+    // console.log(`j loop = ${j}`)
+    for (let i = j; i < j + 6; i++) {
+        // for (let i = 0; i < 0 + 7; i++) {
+        // console.log(`i loop = i ${i} j ${j}`);
+        boxes[i].boxBottomLeft = boxes[i + 7]
+    }
+}
+
+//box bottom left - 1st row
+for (let i = 1; i < 8; i++) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxBottomLeft = boxes[i + 7]
+}
+
+//box bottom left - last column
+for (let i = 15; i < 56; i += 8) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxBottomLeft = boxes[i + 7]
+}
+
 //box left for all rows
 for (let j = 1; j < 58; j += 8) {
     // console.log(`j loop = ${j}`)
@@ -50,6 +132,31 @@ for (let j = 1; j < 58; j += 8) {
     }
 }
 
+//box top left - centre boxes
+for (let j = 9; j < 55; j += 8) {
+    // console.log(`j loop = ${j}`)
+    for (let i = j; i < j + 6; i++) {
+        // for (let i = 0; i < 0 + 7; i++) {
+        // console.log(`i loop = i ${i} j ${j}`);
+        boxes[i].boxTopLeft = boxes[i - 9]
+    }
+}
+
+//box top left - last column
+for (let i = 15; i < 64; i += 8) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxTopLeft = boxes[i - 9]
+}
+
+//box top left - bottom row
+for (let i = 57; i < 63; i++) {
+    // for (let i = 0; i < 0 + 7; i++) {
+    // console.log(`i loop = i ${i} j ${j}`);
+    boxes[i].boxTopLeft = boxes[i - 9]
+}
+
+
 // for (let i = 0; i < 64; i++) {
 //     console.log(i)
 //     console.log(`${i}: ${boxes[i].num}`)
@@ -57,67 +164,10 @@ for (let j = 1; j < 58; j += 8) {
 //     console.log(`${i}: boxRight: ${boxes[i].boxRight.name}`)
 // }
 
+// let box28 = { clicked: false, element: document.getElementById('box28') }
+// let box29/*data*/ = { clicked: "no", element: document.getElementById('box29') }
 
-// for (let i = 0; i < 64; i++) {
-// console.log(`${i}: ${boxes[i].num} ${boxes[i].name}`)
-// console.log(`${boxes[i].name} boxRight = ${boxes[i].boxRight.name}`)
-// }
-
-//     let tempDiv = `div${i + 1}`;
-//     let tempBox = `box${i + 1}`;
-//     console.log(`${tempDiv}: ${tempBox}`)
-//     tempDiv = document.getElementById(`${tempBox}`);
-//     tempDiv.message = `created ${i + 1}`;
-//     boxes.push[tempDiv]
-//     console.log(`inside ${tempDiv.message}`)
-// }
-
-// // boxes[0].message = `created 1`;
-// console.log(boxes[0].message)
-
-// const div1 = document.getElementById('box1')
-// const div2 = document.getElementById('box2')
-// const div3 = document.getElementById('box3')
-// const div4 = document.getElementById('box4')
-// const div5 = document.getElementById('box5')
-const div64 = document.getElementById('box64')
-
-// div1.num = 1;
-// div2.num = 2;
-// div3.num = 3;
-// div4.num = 4;
-// div5.num = 5;
-// div1.clicked = false;
-// div2.clicked = false;
-// div3.clicked = false;
-// div4.clicked = false;
-// div5.clicked = false;
-// div1.boxRight = null;
-// div2.boxRight = null;
-// div3.boxRight = null;
-// div4.boxRight = null;
-// div5.boxRight = null;
-// div1.name = "div-box1";
-// div2.name = "div-box2";
-// div3.name = "div-box3";
-// div4.name = "div-box4";
-// div5.name = "div-box5";
-
-
-let box28 = { clicked: false, element: document.getElementById('box28') }
-let box29/*data*/ = { clicked: "no", element: document.getElementById('box29') }
-
-// box1.boxRight = box2
-// div1.boxRight = div2;
-// div2.boxRight = div3;
-// div3.boxRight = div4;
-// div4.boxRight = div5;
-
-// console.log(`box1.num ${box1.num}`)
-// console.log(`box1.boxRight.num ${box1.boxRight.num}`)
-
-// let box28fill = document.getElementById('box28fill');
-// let box29fill = document.getElementById('box29fill');
+// const div64 = document.getElementById('box64')
 
 //new stuff
 // const boxFactory = (obj, num, name) => {
@@ -148,7 +198,6 @@ let box29/*data*/ = { clicked: "no", element: document.getElementById('box29') }
 
 let buttonStart = document.getElementById('start');
 
-
 function startBoard() {
     let divBoard = document.createElement('div');
     divBoard.id = "board";
@@ -158,86 +207,97 @@ function startBoard() {
 buttonStart.addEventListener('click', startBoard);
 
 
-function fillWhite(event) {
-    event.target.style.backgroundColor = "white";
-    event.target.style.borderRadius = '50%';
-    event.target.style.border = '0px';
-    // event.target.innerHTML = `${box28data.clicked}`;
-    // event.target.textAlign = 'center';
-    if (event.target.clicked) {
-        // console.log(event.target.clicked)
-        event.target.style.backgroundColor = "black"
-        event.target.clicked = true;
-    } else {
-        event.target.style.backgroundColor = "white"
-        event.target.clicked = false;
-    }
+// function fillWhite(event) {
+//     event.target.style.backgroundColor = "white";
+//     event.target.style.borderRadius = '50%';
+//     event.target.style.border = '0px';
+//     // event.target.innerHTML = `${box28data.clicked}`;
+//     // event.target.textAlign = 'center';
+//     if (event.target.clicked) {
+//         // console.log(event.target.clicked)
+//         event.target.style.backgroundColor = "black"
+//         event.target.clicked = true;
+//     } else {
+//         event.target.style.backgroundColor = "white"
+//         event.target.clicked = false;
+//     }
 
-    console.log(`event.target.num = ${event.target.num}`)
-    console.log(`this.num = ${this.num}`)
+//     console.log(`event.target.num = ${event.target.num}`)
+//     console.log(`this.num = ${this.num}`)
 
-    console.log(`in fillWhite with event.target.boxRight.num = ${event.target.boxRight.num} `)
-    console.log(`${event.target.boxRight.name}`)
-    event.target.boxRight.click();
-    event.target.boxRight.boxRight.click();
-
-}
-
-function fillBlack(event) {
-    event.target.style.backgroundColor = "black";
-    event.target.style.borderRadius = '50%';
-    event.target.style.border = '0px';
-    if (event.target.clicked) {
-        event.target.style.backgroundColor = "white"
-        event.target.clicked = true;
-    } else {
-        event.target.style.backgroundColor = "black"
-        event.target.clicked = false;
-    }
-
-}
-
-// const fillNeighbour = () => {
-
-//     box1.boxRight.element.style.backgroundColor = "red";
+//     console.log(`in fillWhite with event.target.boxRight.num = ${event.target.boxRight.num} `)
+//     console.log(`${event.target.boxRight.name}`)
+//     event.target.boxRight.click();
+//     event.target.boxRight.boxRight.click();
 
 // }
 
-// div1.addEventListener('click', fillWhite);
-// div2.addEventListener('click', fillBlack);
-// div3.addEventListener('click', fillWhite);
-boxes[0].addEventListener('click', fillWhite);
-boxes[1].addEventListener('click', fillBlack);
-boxes[2].addEventListener('click', fillWhite);
+// function fillBlack(event) {
+//     event.target.style.backgroundColor = "black";
+//     event.target.style.borderRadius = '50%';
+//     event.target.style.border = '0px';
+//     if (event.target.clicked) {
+//         event.target.style.backgroundColor = "white"
+//         event.target.clicked = true;
+//     } else {
+//         event.target.style.backgroundColor = "black"
+//         event.target.clicked = false;
+//     }
 
-for (let i = 0; i < 64; i++) {
-    boxes[i].addEventListener('click', fillBlack);
-    boxes[i].addEventListener('click', fillWhite);
+// }
+
+function fill(event) {
+    // event.target.style.backgroundColor = "black";
+    event.target.style.borderRadius = '50%';
+    event.target.style.border = '0px';
+    if (event.target.fill === "black" || event.target.fill === false) {
+        event.target.style.backgroundColor = "white"
+        event.target.fill = "white";
+    } else {
+        event.target.style.backgroundColor = "black"
+        event.target.fill = "black";
+    }
+
 }
 
-div64.addEventListener('click', fillBlack);
-// box1.element.addEventListener('click', fillWhite);
-// box1.element.addEventListener('click', function () {
-//     // box1.boxRight.element.style.backgroundColor = "red";
-//     console.log(`box1.num = ${box1.num}`)
-//     console.log(`box1.boxRight = ${box1.boxRight}`)
-//     console.log(`box1.boxRight.num = ${box1.boxRight.num}`)
-//     console.log(`box1.boxRight.element = ${box1.boxRight.element}`)
-//     // fillWhite(box1.boxRight.element)
-//     fillWhite(document.getElementById('box2'));
-// });
-// box2.element.addEventListener('click', fillBlack);
-
-box28.element.addEventListener('click', fillWhite);
-box29.element.addEventListener('click', fillBlack);
-// box36.element.addEventListener('click', fillBlack);
-// box37.element.addEventListener('click', fillWhite);
-
-// box28fill.style.backgroundColor = "white";dir
+for (let i = 0; i < 64; i++) {
+    // boxes[i].addEventListener('click', fillBlack);
+    boxes[i].addEventListener('click', fill);
+}
 
 let randNum = Math.floor(Math.random() * 64)
-
+console.log(`randNum = ${randNum}`);
 boxes[randNum].click();
-boxes[randNum].boxLeft.click();
-boxes[randNum].boxRight.click();
-boxes[randNum].boxTop.click();
+
+if (boxes[randNum].boxTop) {
+    boxes[randNum].boxTop.click();
+}
+
+if (boxes[randNum].boxTopRight) {
+    boxes[randNum].boxTopRight.click();
+}
+
+if (boxes[randNum].boxRight) {
+    boxes[randNum].boxRight.click();
+}
+
+if (boxes[randNum].boxBottomRight) {
+    boxes[randNum].boxBottomRight.click();
+}
+
+if (boxes[randNum].boxBottom) {
+    boxes[randNum].boxBottom.click();
+}
+
+if (boxes[randNum].boxBottomLeft) {
+    boxes[randNum].boxBottomLeft.click();
+}
+
+if (boxes[randNum].boxLeft) {
+    boxes[randNum].boxLeft.click();
+}
+
+if (boxes[randNum].boxTopLeft) {
+    boxes[randNum].boxTopLeft.click();
+}
+
