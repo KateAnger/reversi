@@ -1,4 +1,13 @@
+//global variables
+let turn = 0;
+let turnWhite = 0;
+let turnBlack = 0;
+let whoseTurn = "black";
+
 // const Box = require('./Box');
+
+// import { initBoard } from './Board.js';
+// import './Board.js';
 
 // let box28 = document.getElementById('box28');
 // let box29 = document.getElementById('box29');
@@ -8,154 +17,13 @@
 
 //new stuff
 // let boxes = [{}];
-let boxes = [];
 
-for (let i = 0; i < 64; i++) {
-    let box = document.getElementById(`box${i + 1}`);
-    box.num = i + 1;
-    box.name = `box${i + 1}`
-    box.fill = false;
-    // box.boxRight = 'n/a';
-    // box.boxLeft = 'n/a';
-    boxes.push(box)
-}
+/*************************** */
 
-//box top for all rows
-for (let j = 8; j < 64; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 8; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxTop = boxes[i - 8]
-    }
-}
+// initBoard()
+//now in Board.js
 
-//box top right - centre boxes
-for (let j = 9; j < 55; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 6; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxTopRight = boxes[i - 7]
-    }
-}
-
-//box top right - 1st column
-for (let i = 8; i < 57; i += 8) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxTopRight = boxes[i - 7]
-}
-
-//box top right - bottom row
-for (let i = 57; i < 63; i++) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxTopRight = boxes[i - 7]
-}
-
-//box right for all rows
-for (let j = 0; j < 57; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 7; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxRight = boxes[i + 1]
-    }
-}
-
-//box bottom right - centre boxes
-for (let j = 9; j < 55; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 6; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxBottomRight = boxes[i + 9]
-    }
-}
-
-//box bottom right - top row
-for (let i = 0; i < 7; i++) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxBottomRight = boxes[i + 9]
-}
-
-//box bottom right - 1st row
-for (let i = 8; i < 49; i += 8) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxBottomRight = boxes[i + 9]
-}
-
-//box bottom for all rows
-for (let j = 0; j < 56; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 8; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxBottom = boxes[i + 8]
-    }
-}
-
-//box bottom left - centre boxes
-for (let j = 9; j < 55; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 6; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxBottomLeft = boxes[i + 7]
-    }
-}
-
-//box bottom left - 1st row
-for (let i = 1; i < 8; i++) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxBottomLeft = boxes[i + 7]
-}
-
-//box bottom left - last column
-for (let i = 15; i < 56; i += 8) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxBottomLeft = boxes[i + 7]
-}
-
-//box left for all rows
-for (let j = 1; j < 58; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 7; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxLeft = boxes[i - 1]
-    }
-}
-
-//box top left - centre boxes
-for (let j = 9; j < 55; j += 8) {
-    // console.log(`j loop = ${j}`)
-    for (let i = j; i < j + 6; i++) {
-        // for (let i = 0; i < 0 + 7; i++) {
-        // console.log(`i loop = i ${i} j ${j}`);
-        boxes[i].boxTopLeft = boxes[i - 9]
-    }
-}
-
-//box top left - last column
-for (let i = 15; i < 64; i += 8) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxTopLeft = boxes[i - 9]
-}
-
-//box top left - bottom row
-for (let i = 57; i < 63; i++) {
-    // for (let i = 0; i < 0 + 7; i++) {
-    // console.log(`i loop = i ${i} j ${j}`);
-    boxes[i].boxTopLeft = boxes[i - 9]
-}
-
+/*************************** */
 
 // for (let i = 0; i < 64; i++) {
 //     console.log(i)
@@ -197,6 +65,8 @@ for (let i = 57; i < 63; i++) {
 
 
 let buttonStart = document.getElementById('start');
+
+//guessing needs to toggle display: none and display: flex
 
 function startBoard() {
     let divBoard = document.createElement('div');
@@ -248,16 +118,77 @@ buttonStart.addEventListener('click', startBoard);
 
 function fill(event) {
     // event.target.style.backgroundColor = "black";
-    event.target.style.borderRadius = '50%';
-    event.target.style.border = '0px';
-    if (event.target.fill === "black" || event.target.fill === false) {
-        event.target.style.backgroundColor = "white"
-        event.target.fill = "white";
+    // event.target.style.borderRadius = '50%';
+    // event.target.style.border = '0px';
+
+    // if (!(event.target.boxTopLeft.fill === 'white' || event.target.boxTopLeft.fill === "black")) {
+    if (!(event.target.boxTopLeft.fill)) {
+        console.log(`no top left box filled`)
     } else {
-        event.target.style.backgroundColor = "black"
-        event.target.fill = "black";
+        console.log(`top left box filled`)
     }
 
+    if (!(event.target.boxTop.fill) &&
+        !(event.target.boxTopRight.fill) &&
+        !(event.target.boxRight.fill) &&
+        !(event.target.boxBottomRight.fill) &&
+        !(event.target.boxBottom.fill) &&
+        !(event.target.boxBottomLeft.fill) &&
+        !(event.target.boxLeft.fill) &&
+        !(event.target.boxTopLeft.fill)) {
+        console.log(`can't click here - no borders`);
+        return;
+    }
+
+    if (whoseTurn === "black" &&
+        (event.target.boxTop.fill !== "white") &&
+        (event.target.boxTopRight.fill !== "white") &&
+        (event.target.boxRight.fill !== "white") &&
+        (event.target.boxBottomRight.fill !== "white") &&
+        (event.target.boxBottom.fill !== "white") &&
+        (event.target.boxBottomLeft.fill !== "white") &&
+        (event.target.boxLeft.fill !== "white") &&
+        (event.target.boxTopLeft.fill !== "white")) {
+        console.log(`can't click here - black turn, no white borders`);
+        return;
+    }
+
+    if (whoseTurn === "white" &&
+        (event.target.boxTop.fill !== "black") &&
+        (event.target.boxTopRight.fill !== "black") &&
+        (event.target.boxRight.fill !== "black") &&
+        (event.target.boxBottomRight.fill !== "black") &&
+        (event.target.boxBottom.fill !== "black") &&
+        (event.target.boxBottomLeft.fill !== "black") &&
+        (event.target.boxLeft.fill !== "black") &&
+        (event.target.boxTopLeft.fill !== "black")) {
+        console.log(`can't click here - white turn, no black borders`);
+        return;
+    }
+
+    if (!event.target.fill && whoseTurn === "black") {
+        console.log(`turn number: ${turn}, in black whose turn ${whoseTurn}`)
+        fillWhite(event.target)
+        whoseTurn = "white"
+        turn++;
+    } else if (!event.target.fill && whoseTurn === "white") {
+        console.log(`turn number: ${turn}, in white whose turn ${whoseTurn}`)
+        fillBlack(event.target)
+        whoseTurn = "black"
+        turn++;
+    } else {
+        console.log(`slipped through the cracks`)
+    }
+
+    if (event.target.fill === "black" || event.target.fill === false) {
+        // event.target.style.backgroundColor = "white"
+        // event.target.fill = "white";
+        fillWhite(event.target)
+    } else {
+        // event.target.style.backgroundColor = "black"
+        // event.target.fill = "black";
+        fillBlack(event.target)
+    }
 }
 
 for (let i = 0; i < 64; i++) {
@@ -265,39 +196,54 @@ for (let i = 0; i < 64; i++) {
     boxes[i].addEventListener('click', fill);
 }
 
+/*
 let randNum = Math.floor(Math.random() * 64)
 console.log(`randNum = ${randNum}`);
 boxes[randNum].click();
 
-if (boxes[randNum].boxTop) {
-    boxes[randNum].boxTop.click();
+let i = boxes[randNum];
+let j = boxes[randNum];
+
+while (i.boxTop) {
+    i.boxTop.click();
+    i = i.boxTop
 }
 
-if (boxes[randNum].boxTopRight) {
-    boxes[randNum].boxTopRight.click();
+while (j.boxRight) {
+    j.boxRight.click();
+    j = j.boxRight
 }
+*/
 
-if (boxes[randNum].boxRight) {
-    boxes[randNum].boxRight.click();
-}
+// if (boxes[randNum].boxTop) {
+//     boxes[randNum].boxTop.click();
+// }
 
-if (boxes[randNum].boxBottomRight) {
-    boxes[randNum].boxBottomRight.click();
-}
+// if (boxes[randNum].boxTopRight) {
+//     boxes[randNum].boxTopRight.click();
+// }
 
-if (boxes[randNum].boxBottom) {
-    boxes[randNum].boxBottom.click();
-}
+// if (boxes[randNum].boxRight) {
+//     boxes[randNum].boxRight.click();
+// }
 
-if (boxes[randNum].boxBottomLeft) {
-    boxes[randNum].boxBottomLeft.click();
-}
+// if (boxes[randNum].boxBottomRight) {
+//     boxes[randNum].boxBottomRight.click();
+// }
 
-if (boxes[randNum].boxLeft) {
-    boxes[randNum].boxLeft.click();
-}
+// if (boxes[randNum].boxBottom) {
+//     boxes[randNum].boxBottom.click();
+// }
 
-if (boxes[randNum].boxTopLeft) {
-    boxes[randNum].boxTopLeft.click();
-}
+// if (boxes[randNum].boxBottomLeft) {
+//     boxes[randNum].boxBottomLeft.click();
+// }
+
+// if (boxes[randNum].boxLeft) {
+//     boxes[randNum].boxLeft.click();
+// }
+
+// if (boxes[randNum].boxTopLeft) {
+//     boxes[randNum].boxTopLeft.click();
+// }
 
