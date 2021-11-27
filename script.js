@@ -122,12 +122,14 @@ function fill(event) {
     // event.target.style.border = '0px';
 
     // if (!(event.target.boxTopLeft.fill === 'white' || event.target.boxTopLeft.fill === "black")) {
-    if (!(event.target.boxTopLeft.fill)) {
-        console.log(`no top left box filled`)
-    } else {
-        console.log(`top left box filled`)
-    }
+    // don't need
+    // if (!(event.target.boxTopLeft.fill)) {
+    //     console.log(`no top left box filled`)
+    // } else {
+    //     console.log(`top left box filled`)
+    // }
 
+    // no border squares - get rid of
     if (!(event.target.boxTop.fill) &&
         !(event.target.boxTopRight.fill) &&
         !(event.target.boxRight.fill) &&
@@ -140,55 +142,242 @@ function fill(event) {
         return;
     }
 
+    // black, no white borders, or, white, not black borders - get rid of
     if (whoseTurn === "black" &&
-        (event.target.boxTop.fill !== "white") &&
-        (event.target.boxTopRight.fill !== "white") &&
-        (event.target.boxRight.fill !== "white") &&
-        (event.target.boxBottomRight.fill !== "white") &&
-        (event.target.boxBottom.fill !== "white") &&
-        (event.target.boxBottomLeft.fill !== "white") &&
-        (event.target.boxLeft.fill !== "white") &&
-        (event.target.boxTopLeft.fill !== "white")) {
-        console.log(`can't click here - black turn, no white borders`);
-        return;
+        ((event.target.boxTop.fill === "white") ||
+            (event.target.boxTopRight.fill === "white") ||
+            (event.target.boxRight.fill === "white") ||
+            (event.target.boxBottomRight.fill === "white") ||
+            (event.target.boxBottom.fill === "white") ||
+            (event.target.boxBottomLeft.fill === "white") ||
+            (event.target.boxLeft.fill === "white") ||
+            (event.target.boxTopLeft.fill === "white"))) {
+        console.log(`semi-legit move`)
+        // } else {
+        //     console.log(`can't click here - black turn, no white borders`);
+        //     return;
     }
 
-    if (whoseTurn === "white" &&
-        (event.target.boxTop.fill !== "black") &&
-        (event.target.boxTopRight.fill !== "black") &&
-        (event.target.boxRight.fill !== "black") &&
-        (event.target.boxBottomRight.fill !== "black") &&
-        (event.target.boxBottom.fill !== "black") &&
-        (event.target.boxBottomLeft.fill !== "black") &&
-        (event.target.boxLeft.fill !== "black") &&
-        (event.target.boxTopLeft.fill !== "black")) {
-        console.log(`can't click here - white turn, no black borders`);
-        return;
-    }
-
-    if (!event.target.fill && whoseTurn === "black") {
-        console.log(`turn number: ${turn}, in black whose turn ${whoseTurn}`)
-        fillWhite(event.target)
-        whoseTurn = "white"
-        turn++;
-    } else if (!event.target.fill && whoseTurn === "white") {
-        console.log(`turn number: ${turn}, in white whose turn ${whoseTurn}`)
-        fillBlack(event.target)
-        whoseTurn = "black"
-        turn++;
+    else if (whoseTurn === "white" &&
+        ((event.target.boxTop.fill === "black") ||
+            (event.target.boxTopRight.fill === "black") ||
+            (event.target.boxRight.fill === "black") ||
+            (event.target.boxBottomRight.fill === "black") ||
+            (event.target.boxBottom.fill === "black") ||
+            (event.target.boxBottomLeft.fill === "black") ||
+            (event.target.boxLeft.fill === "black") ||
+            (event.target.boxTopLeft.fill === "black"))) {
+        console.log(`semi-legit move`)
     } else {
-        console.log(`slipped through the cracks`)
+        console.log(`can't click here ${whoseTurn}`)
+        return;
+        // console.log(`can't click here - white turn, no black borders`);
+        // return;
     }
 
-    if (event.target.fill === "black" || event.target.fill === false) {
-        // event.target.style.backgroundColor = "white"
-        // event.target.fill = "white";
-        fillWhite(event.target)
+    console.log(`${event.target.num} ${event.target.boxRight.fill} ${whoseTurn}`)
+
+    /* 26/11 */
+    let j = event.target;
+    let k = event.target;
+
+    //black - boxTop
+    if (whoseTurn === "black" && event.target.fill === false && event.target.boxTop.fill === "white") {
+        console.log(`in if 1`)
+        while (j.boxTop.fill && j.boxTop.fill !== "black") {
+            console.log(`in while 1`)
+            j = j.boxTop;
+        }
+
+        if (j.boxTop.fill === "black") {
+            console.log(`in if 2`)
+            while (k !== j) {
+                console.log(`in while 2`)
+                k = k.boxTop;
+                k.fill = "black";
+                fillBlack(k);
+            }
+            fillBlack(event.target);
+            //don't reassign yet - need to loop through all directions first before switching to "white"
+            whoseTurn = "white";
+            turn++
+        }
     } else {
-        // event.target.style.backgroundColor = "black"
-        // event.target.fill = "black";
-        fillBlack(event.target)
+        console.log("black turn, white square but not bound by black - box top")
     }
+
+    j = event.target;
+    k = event.target;
+
+    //black - boxTopRight
+    if (whoseTurn === "black" && event.target.fill === false && event.target.boxTopRight.fill === "white") {
+        console.log(`in if 1`)
+        while (j.boxTopRight.fill && j.boxTopRight.fill !== "black") {
+            console.log(`in while 1`)
+            j = j.boxTopRight;
+        }
+
+        if (j.boxTopRight.fill === "black") {
+            console.log(`in if 2`)
+            while (k !== j) {
+                console.log(`in while 2`)
+                k = k.boxTopRight;
+                k.fill = "black";
+                fillBlack(k);
+            }
+            fillBlack(event.target);
+            whoseTurn = "white";
+            turn++;
+        } else {
+            console.log(`last square is not black`)
+        }
+    } else {
+        console.log("black turn, white square but not bound by black - box top right")
+    }
+
+    j = event.target;
+    k = event.target;
+
+    //black - boxRight
+    if (whoseTurn === "black" && event.target.fill === false && event.target.boxRight.fill === "white") {
+        console.log(`in if 1`)
+        while (j.boxRight.fill && j.boxRight.fill !== "black") {
+            console.log(`in while 1`)
+            j = j.boxRight;
+        }
+
+        if (j.boxRight.fill === "black") {
+            console.log(`in if 2`)
+            while (k !== j) {
+                console.log(`in while 2`)
+                k = k.boxRight;
+                k.fill = "black";
+                fillBlack(k);
+            }
+            fillBlack(event.target);
+            whoseTurn = "white";
+            turn++;
+        } else {
+            console.log(`last square is not black`)
+        }
+    } else {
+        console.log("black turn, white square but not bound by black - box  right")
+    }
+
+
+    j = event.target;
+    k = event.target;
+
+    //white - boxTop
+    if (whoseTurn === "white" && event.target.fill === false && event.target.boxTop.fill === "black") {
+        console.log(`in if 1`)
+        while (j.boxTop.fill && j.boxTop.fill !== "white") {
+            console.log(`in while 1`)
+            j = j.boxTop;
+        }
+
+        if (j.boxTop.fill === "white") {
+            console.log(`in if 2`)
+            while (k !== j) {
+                console.log(`in while 2`)
+                k = k.boxTop;
+                k.fill = "white";
+                fillWhite(k);
+            }
+            fillWhite(event.target);
+            whoseTurn = "black";
+            turn++
+        }
+    } else {
+        console.log("white turn, black square but not bound by white - box top")
+    }
+
+    j = event.target;
+    k = event.target;
+
+    //white - boxTopRight
+    if (whoseTurn === "white" && event.target.fill === false && event.target.boxTopRight.fill === "black") {
+        console.log(`in if 1`)
+        while (j.boxTopRight.fill && j.boxTopRight.fill !== "white") {
+            console.log(`in while 1`)
+            j = j.boxTopRight;
+        }
+
+        if (j.boxTopRight.fill === "white") {
+            console.log(`in if 2`)
+            while (k !== j) {
+                console.log(`in while 2`)
+                k = k.boxTopRight;
+                k.fill = "white";
+                fillWhite(k);
+            }
+            fillWhite(event.target);
+            whoseTurn = "black";
+            turn++;
+        } else {
+            console.log(`last square is not white`)
+        }
+    } else {
+        console.log("white turn, black square but not bound by white - box top right")
+    }
+
+    //white - boxRight
+    if (whoseTurn === "white" && event.target.fill === false && event.target.boxRight.fill === "black") {
+        console.log(`in if 1`)
+        while (j.boxRight.fill && j.boxRight.fill !== "white") {
+            console.log(`in while 1`)
+            j = j.boxRight;
+        }
+
+        if (j.boxRight.fill === "white") {
+            console.log(`in if 2`)
+            while (k !== j) {
+                console.log(`in while 2`)
+                k = k.boxRight;
+                k.fill = "white";
+                fillWhite(k);
+            }
+            fillWhite(event.target);
+            whoseTurn = "black";
+            turn++;
+        } else {
+            console.log(`last square is not white`)
+        }
+    } else {
+        console.log("white turn, black square but not bound by white - box right")
+    }
+
+    /* end 26/11 */
+
+    // old stuff #1 - moved to up above, below the empty borders check
+
+    // if (!event.target.fill && whoseTurn === "black") {
+    //     console.log(`turn number: ${turn}, in black whose turn ${whoseTurn}`)
+    //     fillBlack(event.target)
+
+    //     // old stuff #2
+
+    //     whoseTurn = "white"
+    //     turn++;
+
+    // } else if (!event.target.fill && whoseTurn === "white") {
+    //     console.log(`turn number: ${turn}, in white whose turn ${whoseTurn}`)
+    //     fillWhite(event.target)
+    //     whoseTurn = "black"
+    //     turn++;
+    // } else {
+    //     console.log(`slipped through the cracks`)
+    // }
+
+    // if (event.target.fill === "black" || event.target.fill === false) {
+    //     // event.target.style.backgroundColor = "white"
+    //     // event.target.fill = "white";
+    //     fillWhite(event.target)
+    // } else {
+    //     // event.target.style.backgroundColor = "black"
+    //     // event.target.fill = "black";
+    //     fillBlack(event.target)
+    // }
 }
 
 for (let i = 0; i < 64; i++) {
