@@ -1,9 +1,20 @@
 //global variables
-let turn = 0;
+let turn = 1;
 let turnWhite = 0;
 let turnBlack = 0;
 let whoseTurn = "black";
 let somethingFlipped = false;
+const pTurn = document.getElementById("turn");
+const pWhoseTurn = document.getElementById("whose-turn");
+const pNumBlack = document.getElementById("num-black");
+const pNumWhite = document.getElementById("num-white");
+
+function updateStats() {
+    pTurn.innerHTML = turn;
+    pWhoseTurn.innerHTML = whoseTurn;
+    pNumBlack.innerHTML = 2;
+    pNumWhite.innerHTML = 2;
+}
 
 // const Box = require('./Box');
 
@@ -92,7 +103,7 @@ function flip(current, neighbour, colour) {
         console.log(`in while 1`)
         j = j[neighbour];
     }
-
+    //need to look at this logic, (above and below) - i think this is why if there's a gap, it fills the whole lot
     if (j[neighbour] && j[neighbour].fill === colour) {
         console.log(`in if 2`)
         while (k !== j) {
@@ -302,14 +313,18 @@ function fill(event) {
         console.log(`1. before whose turn ${whoseTurn}`)
         whoseTurn = "white";
         console.log(`1. after whose turn ${whoseTurn}`)
-        turn++;
+        turn += 1;
         somethingFlipped = false;
+        console.log(`1. turn # ${turn}`);
+        play()
     } else if (whoseTurn === "white" && somethingFlipped) {
         console.log(`2. before whose turn ${whoseTurn}`)
         whoseTurn = "black";
         console.log(`2. after whose turn ${whoseTurn}`)
-        turn++;
+        turn += 1;
         somethingFlipped = false;
+        console.log(`2. turn # ${turn}`);
+        play()
     } else {
         console.log(`some other scenario`)
     }
@@ -371,3 +386,42 @@ while (j.boxRight) {
 //     boxes[randNum].boxTopLeft.click();
 // }
 
+console.log(`before the if else loop at the bottom with turn number: ${turn}`)
+
+function computer() {
+    console.log(`computer's turn - white`)
+    let computer = 0;
+    do {
+        computer = Math.floor((Math.random() * 64))
+        boxes[computer].click()
+    } while (!boxes[computer].fill)
+}
+
+function play() {
+    updateStats();
+    if (turn % 2 === 1) {
+        // whoseTurn = "black";
+        console.log(`my turn - black`);
+        // return;
+    } else if (turn % 2 === 0) {
+        // whoseTurn = "white";
+        // function computer() {
+        //     console.log(`computer's turn - white`)
+        //     let computer = 0;
+        //     do {
+        //         computer = Math.floor((Math.random() * 64))
+        //         boxes[computer].click()
+        //     } while (!boxes[computer].fill)
+        // }
+
+        let timeoutID = setTimeout(computer(), 10000);
+        clearTimeout(timeoutID);
+
+    } else {
+        console.log(`computer move not moving`)
+    }
+}
+
+if (turn === 1) {
+    play();
+}
